@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <title>lab</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="./js/RequestAnimationFrame.js"></script>
+    <script type="text/javascript" src="./js/threejs/build/three.js"></script>
+    <script type="text/javascript" src="./js/threejs/examples/js/controls/OrbitControls.js"></script>
+    <script type="text/javascript" src="./js/_init.js"></script>
+    <script type="text/javascript" src="./random.js"></script>
+    <script type="text/javascript">
+        function randomRange(min, max) {
+            return Math.random()*(max-min) + min;
+        }
+
+        var particlesLength = 10000;
+
+        function newpos( x, y, z ) {
+
+            return new THREE.Vector3( x, y, z );
+
+        }
+
+        ready(function(){
+            var particleGeometry = new THREE.Geometry();
+            var r, p;
+/*
+            for ( i = 0; i < particlesLength; i ++ ) {
+
+                particleGeometry.vertices.push( newpos( randomRange(-10, 10),randomRange(-10, 10), randomRange(-10, 10) ) );
+            }
+*/
+            for (var i = 0;i < V.length;i ++){
+                particleGeometry.vertices.push( new THREE.Vector3().copy(V[i]) );
+            }
+            // Create pools of vectors
+            particleCloud = new THREE.ParticleSystem( particleGeometry, new THREE.MeshBasicMaterial({
+                color: 0x3366cc
+            }) );
+
+            scene.add(particleCloud);
+            enableCameraControl();
+        });
+    </script>
+</head>
+<body>
+<div></div>
+</body>
+</html>
